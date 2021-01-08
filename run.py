@@ -10,6 +10,7 @@ from itertools import zip_longest
 if len(sys.argv) == 2:
    URL = sys.argv[1]
 else: exit()
+
 PREFIX_URL = 'https://www.acmicpc.net'
 html = request.get(URL).text
 soup = BeautifulSoup(html, 'html.parser')
@@ -36,14 +37,14 @@ def body(soup):
         for head, paragraph, sample in zip_longest(heads, paragraphs, samples):
             if head and not paragraph and not sample:
                 continue
-            if head:
+            if head: #말머리
                 try:
                     head_text = head.text.replace('복사', '').strip()
                 except:
                     head_text = head.text
                 md_text.append('## ' + head_text )
                 md_text.append('   \n')
-            if paragraph:
+            if paragraph: #본문
                 md_text.append(paragraph.text)
                 md_text.append('   \n')
                 md_text.append('   \n')
@@ -52,18 +53,12 @@ def body(soup):
                     md_text.append('   \n')
                     md_text.append('   \n')
             if sample: #예제 입력
-                sample_in, sample_out = samples
                 md_text.append('```')
                 md_text.append('   \n')
-                md_text.append(sample_in.text)
+                md_text.append(sample.text)
                 md_text.append('```')
                 md_text.append('   \n')
 
-                md_text.append('```')
-                md_text.append('   \n')
-                md_text.append(sample_out.text)
-                md_text.append('```')
-                md_text.append('   \n')
 
 
     return md_text
