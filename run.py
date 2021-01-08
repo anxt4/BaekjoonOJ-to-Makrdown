@@ -10,7 +10,6 @@ from itertools import zip_longest
 if len(sys.argv) == 2:
    URL = sys.argv[1]
 else: exit()
-
 PREFIX_URL = 'https://www.acmicpc.net'
 html = request.get(URL).text
 soup = BeautifulSoup(html, 'html.parser')
@@ -55,11 +54,10 @@ def body(soup):
             if sample: #예제 입력
                 md_text.append('```')
                 md_text.append('   \n')
-                md_text.append(sample.text)
+                md_text.append(sample.text.strip())
+                md_text.append('   \n')
                 md_text.append('```')
                 md_text.append('   \n')
-
-
 
     return md_text
 
@@ -69,7 +67,6 @@ def reference(URL):
     line.append("### 출처\n")
     line.append(str(URL))
     return line
-
 
 
 with open('README.md', 'w') as file:
