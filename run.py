@@ -7,10 +7,9 @@ from bs4 import BeautifulSoup
 import request, sys
 from itertools import zip_longest
 
-# if len(sys.argv) == 2:
-#    URL = sys.argv[1]
-# else: exit()
-URL  = 'https://www.acmicpc.net/problem/7576'
+if len(sys.argv) == 2:
+   URL = sys.argv[1]
+else: exit()
 PREFIX_URL = 'https://www.acmicpc.net'
 html = request.get(URL).text
 soup = BeautifulSoup(html, 'html.parser')
