@@ -44,11 +44,14 @@ def body(soup):
                 md_text.append('## ' + head_text )
                 md_text.append('   \n')
             if paragraph: #본문
-                md_text.append(paragraph.text)
+                md_text.append(md.convert(str(paragraph)))
                 md_text.append('   \n')
                 md_text.append('   \n')
-                if paragraph.img:
-                    md_text.append(str(paragraph.img).replace('src="', 'src="'+ PREFIX_URL ))
+                if paragraph.img: #이미지
+                    if str(paragraph.img).find('https') > 0:
+                        md_text.append(str(paragraph.img))
+                    else:
+                        md_text.append(str(paragraph.img).replace('src="', 'src="'+ PREFIX_URL ))
                     md_text.append('   \n')
                     md_text.append('   \n')
             if sample: #예제 입력
